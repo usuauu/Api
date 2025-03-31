@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBC Arabic News</title>
+    <link rel="stylesheet" href="font/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #000000;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+        }
+        .news-container {
+            padding: 10px;
+        }
+        .news-item {
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .news-item img {
+            width: 80px;
+            height: 80px;
+            margin-left: 15px;
+            border-radius: 5px;
+        }
+        .news-item .text {
+            margin-right: 15px;
+            flex: 1;
+            text-align: right;
+        }
+        .news-item .text h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .news-item .text p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .news-item .time {
+            color: #999;
+            font-size: 14px;
+        }
+        .news-item .content {
+            margin-top: 10px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="https://example.com" target="_blank">
+            <i class="icon-logo"></i>
+        </a>
+    </div>
+
+    <div class="news-container" id="news-container">
+        <!-- الأخبار ستظهر هنا -->
+    </div>
+
+    <script>
+        // دالة لتحويل الفرق بين الأوقات إلى نص زمني
+        function timeAgo(date) {
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (seconds < 60) {
+                return `${seconds} ثانية`;
+            } else if (minutes < 60) {
+                return `${minutes} دقيقة`;
+            } else if (hours < 24) {
+                return `${hours} ساعة`;
+            } else {
+                return `${days} يوم`;
+            }
+        }
+
+        // تحميل الأخبار من ملف JSON
+        fetch('news.json')
+            .then(response => response.json())
+            .then(data => {
+                const newsContainer = document.getElementById('news-container');
+                data.forEach(newsItem => {
+                    const newsElement = document.createElement('div');
+                    newsElement.classList.add('news-item');
+                    
+                    const newsDate = new Date(newsItem.timestamp);
+                    const timeAgoText = timeAgo(newsDate);
+
+                    newsElement.innerHTML = `
+                        <img src="${newsItem.image}" alt="Article Image">
+                        <div class="text">
+                            <h3>${newsItem.title}</h3>
+                            <p class="time">${timeAgoText}</p>
+                            <p class="content">${newsItem.content}</p>
+                        </div>
+                    `;
+                    
+                    newsContainer.appendChild(newsElement);
+
+                    // تحديث الوقت بشكل دوري (كل دقيقة مثلاً)
+                    setInterval(() => {
+                        const timeElements = newsElement.querySelectorAll('.time');
+                        timeElements.forEach(element => {
+                            element.textContent = timeAgo(newsDate);
+                        });
+                    }, 60000); // التحديث كل دقيقة
+                });
+            })
+            .catch(error => console.error('Error loading news:', error));
+    </script>
+</body>
+</html>
