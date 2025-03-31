@@ -1,0 +1,21 @@
+{
+  "message": "Welcome to our API!",
+  "user": {
+    "id": 123,
+    "name": "John Doe",
+    "role": "Admin",
+    "email": "johndoe@example.com"
+  },
+  "status": "success",
+  "data": {
+    "items": [
+      { "id": 1, "name": "Item 1", "description": "Description for item 1" },
+      { "id": 2, "name": "Item 2", "description": "Description for item 2" },
+      { "id": 3, "name": "Item 3", "description": "Description for item 3" }
+    ],
+    "additionalInfo": {
+      "lastUpdated": "2025-03-31",
+      "totalItems": 3
+    }
+  }
+}
