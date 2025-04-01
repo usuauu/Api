@@ -1,126 +1,19 @@
 {
-  "name": "Example API",
+  "name": "Simple Text API",
   "version": "1.0",
-  "base_url": "https://apitvvv.netlify.app/api.json",
-  "description": "This is a sample REST API for demonstration purposes.",
+  "base_url": "https://apitvvv.netlify.app",
+  "description": "This is a simple API that returns a text message.",
   "endpoints": [
     {
       "method": "GET",
-      "path": "/users",
-      "description": "Fetches a list of users.",
+      "path": "/message",
+      "description": "Fetches a simple text message.",
       "parameters": [],
       "response": {
         "status": 200,
-        "data": [
-          {
-            "id": 1,
-            "name": "John Doe",
-            "email": "john@example.com"
-          },
-          {
-            "id": 2,
-            "name": "Jane Smith",
-            "email": "jane@example.com"
-          }
-        ]
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/users",
-      "description": "Creates a new user.",
-      "parameters": [
-        {
-          "name": "name",
-          "type": "string",
-          "required": true,
-          "description": "The name of the user."
-        },
-        {
-          "name": "email",
-          "type": "string",
-          "required": true,
-          "description": "The email address of the user."
-        }
-      ],
-      "response": {
-        "status": 201,
         "data": {
-          "id": 3,
-          "name": "Alice Cooper",
-          "email": "alice@example.com"
+          "message": "Hello, this is a simple message from the API!"
         }
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/users/{id}",
-      "description": "Fetches a specific user by ID.",
-      "parameters": [
-        {
-          "name": "id",
-          "type": "integer",
-          "required": true,
-          "description": "The unique ID of the user."
-        }
-      ],
-      "response": {
-        "status": 200,
-        "data": {
-          "id": 1,
-          "name": "John Doe",
-          "email": "john@example.com"
-        }
-      }
-    },
-    {
-      "method": "PUT",
-      "path": "/users/{id}",
-      "description": "Updates an existing user by ID.",
-      "parameters": [
-        {
-          "name": "id",
-          "type": "integer",
-          "required": true,
-          "description": "The unique ID of the user."
-        },
-        {
-          "name": "name",
-          "type": "string",
-          "required": false,
-          "description": "The updated name of the user."
-        },
-        {
-          "name": "email",
-          "type": "string",
-          "required": false,
-          "description": "The updated email address of the user."
-        }
-      ],
-      "response": {
-        "status": 200,
-        "data": {
-          "id": 1,
-          "name": "Johnathan Doe",
-          "email": "johnathan@example.com"
-        }
-      }
-    },
-    {
-      "method": "DELETE",
-      "path": "/users/{id}",
-      "description": "Deletes a user by ID.",
-      "parameters": [
-        {
-          "name": "id",
-          "type": "integer",
-          "required": true,
-          "description": "The unique ID of the user."
-        }
-      ],
-      "response": {
-        "status": 204,
-        "data": null
       }
     }
   ]
